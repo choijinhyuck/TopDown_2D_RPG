@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAction : MonoBehaviour
 {
     public float speed;
+    public GameManager manager;
 
     float h;
     float v;
@@ -53,7 +54,7 @@ public class PlayerAction : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && scanObject != null)
         {
-            Debug.Log("This is :" + scanObject.name);
+            manager.Action(scanObject);
         }
 
     }
@@ -76,6 +77,13 @@ public class PlayerAction : MonoBehaviour
 
     void MovePlayer()
     {
+        if (manager.isAction)
+        {
+            h = 0;
+            v = 0;
+            return;
+        }
+
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
